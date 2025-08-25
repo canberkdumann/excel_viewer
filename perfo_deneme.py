@@ -2228,7 +2228,7 @@ if view_mode == "Tablo":
 # -------------------------
 # KART GÖRÜNÜMÜ
 # -------------------------
-else:
+elif view_mode == "📄 Kart":
     if df_f.empty:
         st.info("Gösterilecek kart yok.")
     else:
@@ -2245,4 +2245,3 @@ else:
 
 else:
     st.info("🚀 Başlamak için **.xlsx** dosyanızı yükleyin veya soldan bir dosya seçin.")
-    st.stop())
