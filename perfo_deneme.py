@@ -1299,16 +1299,11 @@ if selected_file_to_load:
             st.session_state.perf_monitor.end_operation(load_operation, False)
             error_handler.display_error(e, "Dosya okuma sırasında")
             st.stop()
-else:
-    st.info("🚀 Başlamak için **.xlsx** dosyanızı yükleyin veya soldan bir dosya seçin.")
-    st.stop()
 
-# -------------------------
-# MAIN APPLICATION TABS
-# -------------------------
-
-# MAIN APPLICATION TABS
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Veri Analizi", "📈 Akıllı Analitik", "🔍 Keşif & Filtreler", "⭐ Favorilerim", "⚡ Performans"])
+    # -------------------------
+    # MAIN APPLICATION TABS
+    # -------------------------
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Veri Analizi", "📈 Akıllı Analitik", "🔍 Keşif & Filtreler", "⭐ Favorilerim", "⚡ Performans"])
 
 with tab1:
     st.subheader("📊 Veri Görselleştirme ve Temel Analiz")
@@ -2247,3 +2242,7 @@ else:
                         st.markdown(f"**{col}:** {row.get(col, '—') if pd.notna(row.get(col, None)) else '—'}")
                     with st.expander("Tüm Alanlar"):
                         st.json({c: (None if pd.isna(v) else v) for c, v in row.items()})
+
+else:
+    st.info("🚀 Başlamak için **.xlsx** dosyanızı yükleyin veya soldan bir dosya seçin.")
+    st.stop())
