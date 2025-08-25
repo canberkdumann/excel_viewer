@@ -2128,13 +2128,6 @@ if 'chat_history' in st.session_state and st.session_state['chat_history']:
                 st.info(f"ℹ️ {chat['result']}")
             st.write("---")
 
-st.sidebar.markdown("---")
-
-# Talep No filtresi
-talep_no_col = "Talep No" if "Talep No" in df.columns else None
-talep_no_values = sorted(df[talep_no_col].dropna().astype(str).unique()) if talep_no_col else []
-selected_talep_nos = st.sidebar.multiselect("Talep No seçin (opsiyonel)", talep_no_values)
-
 # Metin arama
 options = [c for c in df.columns if df[c].dtype == "object" or str(df[c].dtype).startswith("string")]
 search_cols_default = [c for c in required_cols if c in options and c != "Talep No"]
