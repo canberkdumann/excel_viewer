@@ -1,7 +1,7 @@
 # perfo_destek_app.py
-# Streamlit arayÃ¼zÃ¼: "Perfo Destek Ã‡Ã¶zÃ¼mleri.xlsx" gibi dosyalar iÃ§in
-# Kolonlar: Talep No, Talep AÃ§Ä±klamasÄ±, YanÄ±t, YanÄ±t AÃ§Ä±klamasÄ± (ve diÄŸerleri)
-# Ã‡alÄ±ÅŸtÄ±rma: streamlit run perfo_destek_app.py
+# Streamlit arayüzü: "Perfo Destek Çözümleri.xlsx" gibi dosyalar için
+# Kolonlar: Talep No, Talep Açıklaması, Yanıt, Yanıt Açıklaması (ve diğerleri)
+# Çalıştırma: streamlit run perfo_destek_app.py
 
 
 import streamlit as st
@@ -1223,8 +1223,8 @@ st.markdown("""
 
 st.markdown("""
 <div class="main-header">
-    <h1>ğŸš€ Enterprise Excel GÃ¶rÃ¼ntÃ¼leyici</h1>
-    <p>AI Destekli â€¢ Performance Monitoring â€¢ Smart Analytics</p>
+    <h1>🚀 Enterprise Excel Görüntüleyici</h1>
+    <p>AI Destekli • Performance Monitoring • Smart Analytics</p>
     <div>
         <span class="feature-badge">ğŸ§  AI Powered</span>
         <span class="feature-badge">âš¡ High Performance</span>
