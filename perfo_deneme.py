@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # perfo_destek_app.py
 # Streamlit arayüzü: "Perfo Destek Çözümleri.xlsx" gibi dosyalar için
 # Kolonlar: Talep No, Talep Açıklaması, Yanıt, Yanıt Açıklaması (ve diğerleri)
@@ -36,7 +37,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ğŸš€ MODERN ENTERPRISE FEATURES
+# 🚀 MODERN ENTERPRISE FEATURES
 # ===============================
 
 # 1. PERFORMANCE MONITORING SYSTEM
@@ -182,7 +183,7 @@ class SmartErrorHandler:
                 'category': 'Memory',
                 'severity': 'High',
                 'message': 'Bellek yetersizliÄŸi tespit edildi',
-                'solution': 'Dosya boyutunu kÃ¼Ã§Ã¼ltÃ¼n veya sayfalama kullanÄ±n',
+                'solution': 'Dosya boyutunu küçültün veya sayfalama kullanın',
                 'icon': 'ğŸ§ '
             }
         elif 'file' in error_str or 'no such file' in error_str:
@@ -198,7 +199,7 @@ class SmartErrorHandler:
                 'category': 'Permission',
                 'severity': 'Medium',
                 'message': 'Dosya eriÅŸim izni hatasÄ±',
-                'solution': 'DosyanÄ±n aÃ§Ä±k olmadÄ±ÄŸÄ±ndan emin olun veya yÃ¶netici izinleri alÄ±n',
+                'solution': 'Dosyanın açık olmadığından emin olun veya yönetici izinleri alın',
                 'icon': 'ğŸ”’'
             }
         elif 'encoding' in error_str or 'decode' in error_str:
