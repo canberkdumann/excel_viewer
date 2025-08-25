@@ -1305,8 +1305,8 @@ if selected_file_to_load:
     # -------------------------
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Veri Analizi", "📈 Akıllı Analitik", "🔍 Keşif & Filtreler", "⭐ Favorilerim", "⚡ Performans"])
 
-with tab1:
-    st.subheader("📊 Veri Görselleştirme ve Temel Analiz")
+    with tab1:
+        st.subheader("📊 Veri Görselleştirme ve Temel Analiz")
     
     # Show data summary first
     col1, col2, col3, col4 = st.columns(4)
@@ -1550,8 +1550,8 @@ with tab1:
             # Extra spacing between cards
             st.markdown("<br>", unsafe_allow_html=True)
 
-with tab2:
-    st.subheader("📈 Akıllı Analitik ve İstatistikler")
+    with tab2:
+        st.subheader("📈 Akıllı Analitik ve İstatistikler")
     
     # Smart statistics
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
@@ -1631,9 +1631,9 @@ with tab2:
                 correlation_type = "Pozitif" if corr > 0 else "Negatif"
                 st.write(f"• **{col1}** ↔ **{col2}**: {correlation_type} ({corr:.3f})")
 
-with tab3:
-    st.subheader("🔍 Gelişmiş Keşif ve Filtreler")
-    df = normalize_columns(df_raw)
+    with tab3:
+        st.subheader("🔍 Gelişmiş Keşif ve Filtreler")
+        df = normalize_columns(df_raw)
     
     # Smart search with suggestions
     st.markdown("### 🔍 Akıllı Arama")
@@ -1719,25 +1719,25 @@ with tab3:
                 else:
                     st.info(f"⚠️ Çok fazla benzersiz değer ({len(unique_values)}). Arama kutusunu kullanın.")
 
-with tab4:
-    st.subheader("⭐ Favori Kayıtlarım")
-    
-    if not st.session_state.favorites:
-        st.info("💔 Henüz favori kaydınız yok.")
-        st.markdown("""
-        **Favori nasıl eklenir?**
-        1. 📊 Veri Analizi sekmesine gidin
-        2. Kart görünümünü seçin
-        3. Beğendiğiniz kayıtta ⭐ butonuna tıklayın
-        """)
-    else:
-        # Favori istatistikleri
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Toplam Favori", len(st.session_state.favorites))
-        with col2:
-            if st.button("🗑️ Tümünü Temizle"):
-                st.session_state.favorites = []
+    with tab4:
+        st.subheader("⭐ Favori Kayıtlarım")
+        
+        if not st.session_state.favorites:
+            st.info("💔 Henüz favori kaydınız yok.")
+            st.markdown("""
+            **Favori nasıl eklenir?**
+            1. 📊 Veri Analizi sekmesine gidin
+            2. Kart görünümünü seçin
+            3. Beğendiğiniz kayıtta ⭐ butonuna tıklayın
+            """)
+        else:
+            # Favori istatistikleri
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Toplam Favori", len(st.session_state.favorites))
+            with col2:
+                if st.button("🗑️ Tümünü Temizle"):
+                    st.session_state.favorites = []
                 success_msg = st.success("🗑️ Tüm favoriler temizlendi!")
                 time.sleep(2)
                 success_msg.empty()
@@ -1787,10 +1787,10 @@ with tab4:
             else:
                 st.warning(f"Kayıt #{index} artık mevcut değil.")
 
-with tab5:
-    st.subheader("⚡ Performans İzleme ve Optimizasyon")
-    
-    # Performance metrics
+    with tab5:
+        st.subheader("⚡ Performans İzleme ve Optimizasyon")
+        
+        # Performance metrics
     perf_stats = st.session_state.perf_monitor.get_stats()
     
     if perf_stats:
