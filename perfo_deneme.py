@@ -30,7 +30,7 @@ from typing import List, Dict, Any, Optional
 
 
 st.set_page_config(
-    page_title="ğŸš€ Enterprise Excel GÃ¶rÃ¼ntÃ¼leyici",
+    page_title="🚀 Enterprise Excel Görüntüleyici",
     page_icon="ğŸ—‚ï¸",
     layout="wide",
     initial_sidebar_state="expanded",
