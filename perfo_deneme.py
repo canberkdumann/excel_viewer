@@ -311,35 +311,7 @@ with tab1:
                     json_link = download_link(filtered_df.to_json(orient="records"), "filtered_data.json", "📥 Export as JSON")
                     st.markdown(json_link, unsafe_allow_html=True)
 
-                with col3:
-                    try:
-                        from fpdf import FPDF
-
-                        class PDF(FPDF):
-                            def header(self):
-                                self.set_font('Arial', 'B', 12)
-                                self.cell(0, 10, 'Filtered Data', 0, 1, 'C')
-
-                            def chapter_body(self, data):
-                                self.set_font('Arial', '', 12)
-                                self.multi_cell(0, 10, data)
-
-                        pdf = PDF()
-                        pdf.add_page()
-                        pdf.set_auto_page_break(auto=True, margin=15)
-
-                        data_str = filtered_df.to_string(index=False)
-                        pdf.chapter_body(data_str)
-
-                        pdf_output = BytesIO()
-                        pdf.output(pdf_output)
-                        pdf_output.seek(0)
-
-                        b64_pdf = base64.b64encode(pdf_output.read()).decode()
-                        pdf_link = f'<a href="data:application/pdf;base64,{b64_pdf}" download="filtered_data.pdf">📥 Export as PDF</a>'
-                        st.markdown(pdf_link, unsafe_allow_html=True)
-                    except ImportError:
-                        st.warning("PDF export requires the `fpdf` library. Install it using `pip install fpdf`.")
+                
         except Exception as e:
             error_handler = SmartErrorHandler()
             error_handler.display_error(e)
@@ -498,3 +470,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
