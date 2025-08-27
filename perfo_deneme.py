@@ -14,6 +14,7 @@ from datetime import datetime
 from contextlib import contextmanager
 import os
 from PIL import Image
+import polars as pl  # Use Polars for faster data processing
 
 # Set page configuration
 st.set_page_config(
@@ -410,6 +411,14 @@ with tab1:
                             st.warning(f"Record #{idx + 1} removed from favorites!")
     else:
         st.warning("No data available. Please upload an Excel file.")
+
+# Optimize and cache data processing
+@st.cache_data
+def load_and_process_data(file_path):
+    # Load data using Polars for performance
+    df = pl.read_excel(file_path)
+    # Example processing: Convert to Pandas for compatibility with Streamlit
+    return df.to_pandas()
 
 with tab2:
     st.header("🤖 Smart Analytics")
