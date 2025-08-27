@@ -255,36 +255,41 @@ with tab1:
             st.write("### Search and Filter Records")
             search_keyword = st.text_input("Enter a keyword to search:")
 
+            # Update filtering logic to ensure only matching records are displayed
+            # If the search box is empty, display all records; otherwise, display only filtered records
             if search_keyword:
                 filtered_df = df[df.apply(lambda row: row.astype(str).str.contains(search_keyword, case=False).any(), axis=1)]
             else:
                 filtered_df = df
 
             # Display filtered card view
-            st.write("### Filtered Card View")
-            for idx, row in filtered_df.iterrows():
-                with st.container():
-                    st.markdown(
-                        f"""
-                        <div class='card'>
-                            <h4>Record #{idx + 1}</h4>
-                            <ul>
-                                {''.join([f'<li><strong>{col}:</strong> {row[col]}</li>' for col in filtered_df.columns])}
-                            </ul>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        if st.button(f"⭐ Add to Favorites (Record #{idx + 1})", key=f"add_fav_{uploaded_file.name}_{idx}"):
-                            st.session_state.favorites.append(row.to_dict())
-                            st.success(f"Record #{idx + 1} added to favorites!")
-                    with col2:
-                        if st.button(f"❌ Remove from Favorites (Record #{idx + 1})", key=f"remove_fav_{uploaded_file.name}_{idx}"):
-                            if row.to_dict() in st.session_state.favorites:
-                                st.session_state.favorites.remove(row.to_dict())
-                                st.warning(f"Record #{idx + 1} removed from favorites!")
+            st.write("### Card View")
+            if not filtered_df.empty:
+                for idx, row in filtered_df.iterrows():
+                    with st.container():
+                        st.markdown(
+                            f"""
+                            <div class='card'>
+                                <h4>Record #{idx + 1}</h4>
+                                <ul>
+                                    {''.join([f'<li><strong>{col}:</strong> {row[col]}</li>' for col in filtered_df.columns])}
+                                </ul>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            if st.button(f"⭐ Add to Favorites (Record #{idx + 1})", key=f"add_fav_{uploaded_file.name}_{idx}"):
+                                st.session_state.favorites.append(row.to_dict())
+                                st.success(f"Record #{idx + 1} added to favorites!")
+                        with col2:
+                            if st.button(f"❌ Remove from Favorites (Record #{idx + 1})", key=f"remove_fav_{uploaded_file.name}_{idx}"):
+                                if row.to_dict() in st.session_state.favorites:
+                                    st.session_state.favorites.remove(row.to_dict())
+                                    st.warning(f"Record #{idx + 1} removed from favorites!")
+            else:
+                st.warning("No records match your search. Please try a different keyword.")
         except Exception as e:
             error_handler = SmartErrorHandler()
             error_handler.display_error(e)
