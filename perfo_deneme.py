@@ -277,11 +277,11 @@ with tab1:
                     )
                     col1, col2 = st.columns(2)
                     with col1:
-                        if st.button(f"⭐ Add to Favorites (Record #{idx + 1})", key=f"add_fav_{idx}"):
+                        if st.button(f"⭐ Add to Favorites (Record #{idx + 1})", key=f"add_fav_{uploaded_file.name}_{idx}"):
                             st.session_state.favorites.append(row.to_dict())
                             st.success(f"Record #{idx + 1} added to favorites!")
                     with col2:
-                        if st.button(f"❌ Remove from Favorites (Record #{idx + 1})", key=f"remove_fav_{idx}"):
+                        if st.button(f"❌ Remove from Favorites (Record #{idx + 1})", key=f"remove_fav_{uploaded_file.name}_{idx}"):
                             if row.to_dict() in st.session_state.favorites:
                                 st.session_state.favorites.remove(row.to_dict())
                                 st.warning(f"Record #{idx + 1} removed from favorites!")
