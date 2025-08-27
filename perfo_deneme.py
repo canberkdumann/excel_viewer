@@ -14,7 +14,6 @@ from datetime import datetime
 from contextlib import contextmanager
 import os
 from PIL import Image
-import polars as pl  # Use Polars for faster data processing
 
 # Set page configuration
 st.set_page_config(
@@ -412,14 +411,6 @@ with tab1:
     else:
         st.warning("No data available. Please upload an Excel file.")
 
-# Optimize and cache data processing
-@st.cache_data
-def load_and_process_data(file_path):
-    # Load data using Polars for performance
-    df = pl.read_excel(file_path)
-    # Example processing: Convert to Pandas for compatibility with Streamlit
-    return df.to_pandas()
-
 with tab2:
     st.header("🤖 Smart Analytics")
     st.write("Advanced insights and recommendations.")
@@ -446,10 +437,6 @@ with tab2:
 with tab3:
     st.header("⚡ Performance")
     st.write("Monitor and optimize application performance.")
-
-    # Example operation to populate metrics
-    with st.session_state.perf_monitor.track_operation("Example Operation"):
-        time.sleep(0.5)  # Simulate an operation
 
     perf_stats = st.session_state.perf_monitor.get_stats()
     if perf_stats:
@@ -510,3 +497,49 @@ st.sidebar.write("We value your feedback! Please share your questions, suggestio
 if st.sidebar.button("Send Feedback via Email"):
     feedback_email = "mailto:CemilCanberk.DUMAN@vakifbank.com.tr?subject=Feedback%20on%20Excel%20Viewer&body=Please%20share%20your%20feedback%20here."
     st.sidebar.markdown(f"[Click here to send feedback](<{feedback_email}>)", unsafe_allow_html=True)
+
+# Add custom CSS for the toolbar
+st.markdown(
+    """
+    <style>
+    .st-emotion-cache-14vh5up {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        pointer-events: auto;
+        position: relative;
+        z-index: 999990;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Add additional custom CSS for the toolbar
+st.markdown(
+    """
+    <style>
+    .st-emotion-cache-1ffuo7c {
+        position: absolute;
+        top: 0px;
+        left: -15px;
+        right: 0px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 3.75rem;
+        min-height: 3.75rem;
+        width: 100%;
+        background: rgb(255, 255, 255);
+        outline: none;
+        z-index: 999990;
+        pointer-events: auto;
+        font-size: 0.875rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
