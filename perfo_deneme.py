@@ -261,7 +261,7 @@ with tab1:
                 filtered_df = df
 
             # Display filtered card view
-            st.write("### Card View")
+            st.write("### Filtered Card View")
             for idx, row in filtered_df.iterrows():
                 with st.container():
                     st.markdown(
