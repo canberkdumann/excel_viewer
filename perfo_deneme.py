@@ -311,7 +311,6 @@ with tab1:
                     json_link = download_link(filtered_df.to_json(orient="records"), "filtered_data.json", "📥 Export as JSON")
                     st.markdown(json_link, unsafe_allow_html=True)
 
-                
         except Exception as e:
             error_handler = SmartErrorHandler()
             error_handler.display_error(e)
@@ -471,3 +470,28 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Add additional custom CSS for the toolbar
+st.markdown(
+    """
+    <style>
+    .st-emotion-cache-gquqoo {
+        position: absolute;
+        top: 0px;
+        left: -15px;
+        right: 0px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 3.75rem;
+        min-height: 3.75rem;
+        width: 100%;
+        background: rgb(14, 17, 23);
+        outline: none;
+        z-index: 999990;
+        pointer-events: auto;
+        font-size: 0.875rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
