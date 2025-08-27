@@ -14,6 +14,7 @@ from datetime import datetime
 from contextlib import contextmanager
 import os
 from PIL import Image
+import base64
 
 # Set page configuration
 st.set_page_config(
@@ -198,6 +199,14 @@ uploaded_files = [f for f in os.listdir(uploads_dir) if f.endswith(".xlsx")]
 
 tab1, tab2, tab3, tab4 = st.tabs(["Data Analysis", "Smart Analytics", "Performance", "Favorites"])
 
+# Add export functionality
+def download_link(object_to_download, download_filename, download_link_text):
+    if isinstance(object_to_download, pd.DataFrame):
+        object_to_download = object_to_download.to_csv(index=False)
+    
+    b64 = base64.b64encode(object_to_download.encode()).decode()  # Encode to base64
+    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
+
 # Extend Data Validation and Recommendations
 with tab1:
     st.markdown(
@@ -288,6 +297,49 @@ with tab1:
                                     st.warning(f"Record #{idx + 1} removed from favorites!")
             else:
                 st.warning("No records match your search. Please try a different keyword.")
+
+            # Add export buttons
+            if not filtered_df.empty:
+                st.write("### Export Data")
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    csv_link = download_link(filtered_df, "filtered_data.csv", "📥 Export as CSV")
+                    st.markdown(csv_link, unsafe_allow_html=True)
+
+                with col2:
+                    json_link = download_link(filtered_df.to_json(orient="records"), "filtered_data.json", "📥 Export as JSON")
+                    st.markdown(json_link, unsafe_allow_html=True)
+
+                with col3:
+                    try:
+                        from fpdf import FPDF
+
+                        class PDF(FPDF):
+                            def header(self):
+                                self.set_font('Arial', 'B', 12)
+                                self.cell(0, 10, 'Filtered Data', 0, 1, 'C')
+
+                            def chapter_body(self, data):
+                                self.set_font('Arial', '', 12)
+                                self.multi_cell(0, 10, data)
+
+                        pdf = PDF()
+                        pdf.add_page()
+                        pdf.set_auto_page_break(auto=True, margin=15)
+
+                        data_str = filtered_df.to_string(index=False)
+                        pdf.chapter_body(data_str)
+
+                        pdf_output = BytesIO()
+                        pdf.output(pdf_output)
+                        pdf_output.seek(0)
+
+                        b64_pdf = base64.b64encode(pdf_output.read()).decode()
+                        pdf_link = f'<a href="data:application/pdf;base64,{b64_pdf}" download="filtered_data.pdf">📥 Export as PDF</a>'
+                        st.markdown(pdf_link, unsafe_allow_html=True)
+                    except ImportError:
+                        st.warning("PDF export requires the `fpdf` library. Install it using `pip install fpdf`.")
         except Exception as e:
             error_handler = SmartErrorHandler()
             error_handler.display_error(e)
