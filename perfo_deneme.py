@@ -495,3 +495,32 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Add additional custom CSS for the terminal button
+st.markdown(
+    """
+    <style>
+    ._terminalButton_rix23_138 {
+        position: fixed;
+        right: 10px;
+        bottom: 0;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        padding: .75rem 1.5rem;
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+        --tw-bg-opacity: 1;
+        background-color: rgb(14 17 23 / var(--tw-bg-opacity));
+        display: flex;
+        align-items: center;
+        border-radius: .5rem .25rem .25rem;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
